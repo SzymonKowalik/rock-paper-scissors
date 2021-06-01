@@ -1,0 +1,1 @@
+This project is a part of <strong>The Odin Project</strong> curriculum.
