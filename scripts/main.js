@@ -1,5 +1,5 @@
-console.log("%cRock, paper, scissors - The Game",
-		"font-size: 18px; color: red; background: black");
+console.log("%cRock | Paper | Scissors - The Game",
+		"font-size: 18px; color: white; background: #222; padding: 15px;");
 
 function computerPlay() {
 	let computerSelection = Math.floor(Math.random() * 3);
@@ -19,7 +19,8 @@ function computerPlay() {
 
 function playerPlay() {
 	let playerChoice = prompt('Choose your tool: (Rock/Paper/Scissors)');
-	playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
+	playerChoice = playerChoice.charAt(0).toUpperCase() +
+			playerChoice.slice(1).toLowerCase();
 	let winner;
 
 	if (playerChoice === 'Rock' || playerChoice === 'Paper' ||
@@ -32,21 +33,20 @@ function playerPlay() {
 }
 
 
-function playRound(playerSelection, computerSelection) {
-	let computerChoice = computerPlay();
-	let playerChoice = playerPlay();
+function playRound(computerChoice, playerChoice) {
 
 	if (computerChoice === playerChoice) {
 		winner = null;
+		console.log(`There was a draw! Both players used ${playerChoice}`)
 		return winner;
 	} else if (computerChoice === 'Rock' && playerChoice === 'Scissors' ||
 			computerChoice === 'Scissors' && playerChoice === 'Paper' ||
 			computerChoice === 'Paper' && playerChoice === 'Rock') {
-		console.log(`Computer won ${computerChoice} beats ${playerChoice}`);
+		console.log(`Computer won - ${computerChoice} > ${playerChoice}`);
 		winner = 'computer';
 		return winner;
 	} else {
-		console.log(`Player won ${playerChoice} beats ${computerChoice}`);
+		console.log(`Player won - ${playerChoice} > ${computerChoice}`);
 		winner = 'player';
 		return winner;
 	}
@@ -57,7 +57,9 @@ function game() {
 	let playerPoints = 0;
 
 	while(computerPoints < 3 && playerPoints < 3) {
-		playRound();
+		let computerChoice = computerPlay();
+		let playerChoice = playerPlay();
+		playRound(computerChoice, playerChoice);
 
 		switch(winner) {
 			case 'computer':
